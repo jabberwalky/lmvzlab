@@ -20,6 +20,13 @@ public class Dictionary extends JFrame {
         super(" Справочник");
         initComponents();
 
+        ArrayList<Country> list = new ArrayList<Country>();
+        list.add(new Country("Польша","Варшава","Х****","../LMVZ12/res/warszawa.jpg"));
+        list.add(new Country("США","Вашингтон","Х****","../LMVZ12/res/washington.jpg"));
+        list.add(new Country("Украина","Киев","Х****","../LMVZ12/res/kiev.jpg"));
+        list.add(new Country("Франция","Париж","Х****","../LMVZ12/res/paris.jpg"));
+        list.add(new Country("Чехия","Прага","Х****","../LMVZ12/res/praga.jpg"));
+
 
         setVisible(true);
     }
