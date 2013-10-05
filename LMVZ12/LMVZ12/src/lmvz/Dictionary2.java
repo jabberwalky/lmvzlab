@@ -3,6 +3,12 @@ package lmvz;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.event.*;
+import javax.swing.event.ListSelectionListener;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,10 +18,62 @@ import java.awt.*;
  * To change this template use File | Settings | File Templates.
  */
 public class Dictionary2 extends JFrame {
+    String [] array = {"Великобритания" , "Германия" , "Италия" , "Нидерланды" , "Польша" ,  "Украина" , "Франция"  , "Чехия" };
+    JList<String> list = new JList (array);
+
+    JLabel label1 = new JLabel();
+    JPanel panel = new JPanel();
+    JTextPane textPane = new JTextPane();
+    JLabel label2 = new JLabel();
+    ImagePanel image = new ImagePanel();
+    JLabel label3 = new JLabel();
+    JTextArea textArea = new JTextArea();
     public Dictionary2(){
         super("Cловарь");
         initComponents();
-    }
+        list.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                //To change body of implemented methods use File | Settings | File Templates.
+                if(list.getSelectedValue() == "Великобритания")
+                {
+                    label3.setText("Лондон");
+                }
+                else  if(list.getSelectedValue() == "Германия" )
+                {
+                    label3.setText("Берлин");
+                }
+                else  if(list.getSelectedValue() == "Италия" )
+                {
+                    label3.setText("Рим");
+                }
+                else  if(list.getSelectedValue() == "Нидерланды" )
+                {
+                    label3.setText("Амстердам");
+                }
+                else  if(list.getSelectedValue() == "Польша" )
+                {
+                    label3.setText("Варшава");
+                }
+                else  if(list.getSelectedValue() == "Украина" )
+                {
+                    label3.setText("Киев");
+                }
+                else  if(list.getSelectedValue() == "Франция" )
+                {
+                    label3.setText("Париж");
+                }
+                else  if(list.getSelectedValue() == "Чехия" )
+                {
+                    label3.setText("Прага");
+                }
+            }
+        }) ;
+
+
+      }
+
+
     private void initComponents(){
         setLayout(null);
         JMenu jMenuFile ;
@@ -24,18 +82,12 @@ public class Dictionary2 extends JFrame {
 
 
         //JList<Country> list = new JList();
-        String [] array = {"Польша" , "США" , "Украина" , "Франция" , "Чехия" };
-        JList<String> list = new JList (array);
+     // String [] array = {"Германия" , "Нидерланды" , "Польша" , "Украина" , "Чехия" };
+       // JList<String> list = new JList (array);
+
         jMenuBar = new JMenuBar();
         jMenuFile = new JMenu();
         jMenuEdit = new JMenu();
-        JLabel label1 = new JLabel();
-        JPanel panel = new JPanel();
-        JTextPane textPane = new JTextPane();
-        JLabel label2 = new JLabel();
-        ImagePanel image = new ImagePanel();
-        JLabel label3 = new JLabel();
-        JTextArea textArea = new JTextArea();
 
         panel.setBackground(new Color(255, 244, 243));
         panel.setSize(new Dimension(570, 480));
@@ -53,9 +105,10 @@ public class Dictionary2 extends JFrame {
         label2.setText("Выберите страну:");
         list.setLayoutOrientation(JList.VERTICAL);
         list.setBackground(new Color(255, 206, 17));
-        list.setSize(new Dimension(100, 250));
+        list.setSize(new Dimension(110, 250));
         list.setLocation(40, 150);
         list.setBorder(BorderFactory.createLineBorder(Color.black)) ;
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         label3.setSize(220, 50);
         label3.setBorder(BorderFactory.createLineBorder(Color.black)) ;
         label3.setLocation(250, 30);
