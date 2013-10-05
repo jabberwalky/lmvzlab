@@ -19,6 +19,7 @@ import javax.swing.event.ListSelectionListener;
  * To change this template use File | Settings | File Templates.
  */
 public class Dictionary2 extends JFrame {
+
     String [] array = {"Великобритания" , "Германия" , "Италия" , "Нидерланды" , "Польша" ,  "Украина" , "Франция"  , "Чехия" };
     JList<String> list = new JList (array);
 
@@ -29,6 +30,7 @@ public class Dictionary2 extends JFrame {
     ImagePanel image = new ImagePanel();
     JLabel label3 = new JLabel();
     JTextArea textArea = new JTextArea();
+    Image london = getToolkit().createImage("../LMVZ12/res/tests/london.png");
     public Dictionary2(){
         super("Cловарь");
         initComponents();
@@ -89,6 +91,7 @@ public class Dictionary2 extends JFrame {
         }) ;
 
 
+
       }
 
 
@@ -141,7 +144,11 @@ public class Dictionary2 extends JFrame {
         label3.setBackground(new Color(255, 206, 17));
         image.setSize(300,150);
         image.setLocation(220,85);
-        image.setBackground(Color.black);
+       // image.setBackground(Color.black);
+        image.setImage(london);
+
+        //image.repaint();
+       // image.paintComponent(london);
         textArea.setLocation(220 , 240);
         textArea.setSize(305,165);
         textArea.setBackground(Color.green);
@@ -188,6 +195,11 @@ public class Dictionary2 extends JFrame {
     public void closingFrame(WindowEvent e) {
         if (e.getID()==WindowEvent.WINDOW_CLOSING) {
             this.dispose();
+        }
+    }
+    public void Search(){
+        if(textPane.getText() == "Великобритания"){
+            list.setSelectedIndex(0);
         }
     }
 
