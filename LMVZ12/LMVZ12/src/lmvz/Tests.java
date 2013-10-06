@@ -14,23 +14,18 @@ import java.awt.image.WritableRaster;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created with IntelliJ IDEA.
- * User: denis
- * Date: 10/2/13
- * Time: 3:47 PM
- * To change this template use File | Settings | File Templates.
- */
+
 public class Tests extends JFrame {
 
     private static int questions= -1;
     ArrayList<Country> list;
     Country [] used;
+    PersonalInfo info;
     Random random = new Random();
     int time;
     Timer timer;
     private int [] answers;
-    private int num;
+    private int left;
     private Country [] askedCountries;
     private String [][] askedCapitals;
     JSlider jSlider;
@@ -39,6 +34,14 @@ public class Tests extends JFrame {
     ButtonGroup buttonGroup;
     private JRadioButton [] options;
 
+    public void closeFrame() {
+        processWindowEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }
+
+    public Tests(PersonalInfo pi){
+        this();
+        info = pi;
+    }
 
     public Tests(){
         super(" Тесты");
@@ -47,14 +50,21 @@ public class Tests extends JFrame {
         answers = new int[5];
         list = Data.readData();
         time=0;
-        num=0;
+        left=5;
         timer = new Timer(1170,new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(time++<100){
                     jSlider.setValue(time);
                 }
-                else timer.stop();
+                else {
+                    timer.stop();
+                    int score=0;
+                    for(int i=0;i<answers.length;++i)
+                        if(answers[i]==1)
+                            ++score;
+                    setFinish(score);
+                }
             }
         });
         timer.start();
@@ -99,7 +109,6 @@ public class Tests extends JFrame {
         panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,Color.BLACK, Color.WHITE,Color.BLACK, Color.WHITE));
         panel.setLayout(null);
         jPanel.add(panel);
-        //add(panel);
 
         jSlider = new JSlider();
         jSlider.setSize(300, 30);
@@ -236,9 +245,18 @@ public class Tests extends JFrame {
                     } else {
                         answers[questions] = -1;
                     }
+                    if(--left==0){
+                        int score=0;
+                        for(int i=0;i<answers.length;++i)
+                            if(answers[i]==1)
+                                ++score;
+                        resPanel.repaint();
+                        setFinish(score);
+                    } else {
+                        setQuestion(true);
+                        resPanel.repaint();
+                    }
                 }
-                resPanel.repaint();
-
             }
         });
         panel.add(selectButton);
@@ -307,9 +325,19 @@ public class Tests extends JFrame {
         buttonGroup.clearSelection();
     }
 
-    private void setResult(int result){
-        JDialog dialog = new JDialog();
-        dialog.setPreferredSize(new Dimension(200,100));
-        dialog.setVisible(true);
+
+    private void setFinish(int score){
+        timer.stop();
+        ResultDialog dialog = new ResultDialog(this,score);
+        if(dialog.execute()){
+            new Runnable() {
+                @Override
+                public void run() {
+                    new MainFrame();
+                    closeFrame();
+                }
+            }.run();
+        }
     }
 }
+
