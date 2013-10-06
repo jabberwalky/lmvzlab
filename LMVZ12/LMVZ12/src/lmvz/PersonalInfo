@@ -1,0 +1,42 @@
+package lmvz;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: denis
+ * Date: 10/6/13
+ * Time: 12:21 PM
+ * To change this template use File | Settings | File Templates.
+ */
+public class PersonalInfo {
+    private boolean active;
+    private String lastName;
+    private String firstName;
+    private String className;
+
+    public PersonalInfo(boolean a){
+        active = a;
+    }
+
+    public PersonalInfo(boolean a,String lN,String fN, String cN){
+        this(a);
+        lastName = lN;
+        firstName = fN;
+        className = cN;
+    }
+
+    public boolean isActive(){
+        return active;
+    }
+
+    public String getLastName(){
+        return lastName;
+    }
+
+    public String getFirstName(){
+        return firstName;
+    }
+
+    public String getClassName(){
+        return className;
+    }
+}
