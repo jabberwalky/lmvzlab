@@ -20,7 +20,7 @@ public class Tests extends JFrame {
     private static int questions= -1;
     ArrayList<Country> list;
     Country [] used;
-    PersonalInfo info;
+
     Random random = new Random();
     int time;
     Timer timer;
@@ -38,10 +38,7 @@ public class Tests extends JFrame {
         processWindowEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 
-    public Tests(PersonalInfo pi){
-        this();
-        info = pi;
-    }
+
 
     public Tests(){
         super(" Тесты");

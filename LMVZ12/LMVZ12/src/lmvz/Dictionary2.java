@@ -23,9 +23,11 @@ public class Dictionary2 extends JFrame {
     String [] array = {"Великобритания" , "Германия" , "Италия" , "Нидерланды" , "Польша" ,  "Украина" , "Франция"  , "Чехия" };
     JList<String> list = new JList (array);
 
-    JLabel label1 = new JLabel();
+   // JLabel label1 = new JLabel();
     JPanel panel = new JPanel();
-    JTextPane textPane = new JTextPane();
+    //JTextPane textPane = new JTextPane();
+    String [] comboArray = {"Все" , "Австралия", "Африка" , "Евразия" , "Северная Америка" , "Южная Америка" };
+    JComboBox <String> comboBox = new JComboBox(comboArray);
     JLabel label2 = new JLabel();
     ImagePanel image = new ImagePanel();
     JLabel label3 = new JLabel();
@@ -41,6 +43,7 @@ public class Dictionary2 extends JFrame {
     public Dictionary2(){
         super("Cловарь");
         initComponents();
+
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -126,8 +129,8 @@ public class Dictionary2 extends JFrame {
 
 
         //JList<Country> list = new JList();
-     // String [] array = {"Германия" , "Нидерланды" , "Польша" , "Украина" , "Чехия" };
        // JList<String> list = new JList (array);
+
 
         jMenuBar = new JMenuBar();
         jMenuFile = new JMenu();
@@ -138,19 +141,24 @@ public class Dictionary2 extends JFrame {
         panel.setBackground(new Color(50, 48, 52));
         panel.setSize(new Dimension(570, 480));
         panel.setLocation(10, 10);
-        panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,Color.BLACK, Color.WHITE,Color.BLACK, Color.WHITE));
+        panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.BLACK, Color.WHITE, Color.BLACK, Color.WHITE));
         panel.setLayout(null);
-        textPane.setLocation(40, 65);
-        textPane.setSize(100, 20);
-        textPane.setBorder(BorderFactory.createLineBorder(Color.black)) ;
-        label1.setSize(150, 15);
-        label1.setLocation(45, 30);
-        label1.setText("Поиск :");
+        comboBox.setLocation(40,45);
+        comboBox.setSize(150,20);
+        comboBox.setSelectedIndex(0);
+       // textPane.setLocation(40, 65);
+       // textPane.setSize(100, 20);
+       // textPane.setBorder(BorderFactory.createLineBorder(Color.black)) ;
+       // label1.setSize(150, 15);
+       // label1.setLocation(45, 30);
+      //  label1.setText("Поиск :");
         label2.setSize(150, 15);
         label2.setLocation(40, 110);
         label2.setText("Выберите страну:");
+        //label2.setBackground(new Color(152, 255, 190));
+        repaint();
         list.setLayoutOrientation(JList.VERTICAL);
-        list.setBackground(new Color(255, 206, 17));
+        list.setBackground(new Color(242, 100, 255));
         list.setSize(new Dimension(110, 250));
         list.setLocation(40, 150);
         list.setBorder(BorderFactory.createLineBorder(Color.black)) ;
@@ -164,7 +172,7 @@ public class Dictionary2 extends JFrame {
         label3.setVerticalAlignment(SwingConstants.CENTER);
         label3.setHorizontalAlignment(SwingConstants.CENTER);
 
-        label3.setBackground(new Color(255, 206, 17));
+        label3.setBackground(new Color(152, 255, 190));
         image.setSize(300,150);
         image.setLocation(220,85);
        // image.setBackground(Color.black);
@@ -186,9 +194,10 @@ public class Dictionary2 extends JFrame {
 
 
         add(panel);
-        panel.add(label1);
+     //   panel.add(label1);
+        panel.add(comboBox);
         panel.add(list);
-        panel.add(textPane);
+     //   panel.add(textPane);
         panel.add(label2);
         panel.add(label3);
         panel.add(image);
@@ -220,10 +229,6 @@ public class Dictionary2 extends JFrame {
             this.dispose();
         }
     }
-    public void Search(){
-        if(textPane.getText() == "Великобритания"){
-            list.setSelectedIndex(0);
-        }
-    }
+
 
 }
